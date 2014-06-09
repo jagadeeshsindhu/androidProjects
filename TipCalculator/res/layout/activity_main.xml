@@ -1,0 +1,76 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.tipcalculator.MainActivity"
+    tools:ignore="MergeRootFrame" >
+
+    <EditText
+        android:id="@+id/totalAmt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="29dp"
+
+        android:ems="10"
+        android:hint="Enter the bill Amount" >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/fifteenper"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="120dp"
+        android:onClick="applyfifteenper"
+        android:background="#939393"
+        android:text="15%" />
+
+    <Button
+        android:id="@+id/twentyper"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="170dp"
+        android:layout_marginTop="120dp"
+        android:onClick="applytwentyper"
+        android:background="#939393"
+        android:text="20%" />
+
+    <Button
+        android:id="@+id/tenper"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="120dp"
+        android:onClick="applytenper"
+        android:background="#939393"
+        android:text="10%" />
+
+    <TextView
+        android:id="@+id/displayText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="300dp"
+        android:text="Tip is :"
+        android:visibility="invisible"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/tipValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="300dp"
+        android:visibility="invisible"
+        android:ems="10" >
+	
+        <requestFocus />
+    </EditText>
+
+</FrameLayout>
