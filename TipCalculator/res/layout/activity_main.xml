@@ -14,7 +14,6 @@
         android:layout_below="@+id/textView1"
         android:layout_marginLeft="25dp"
         android:layout_marginTop="29dp"
-
         android:ems="10"
         android:hint="Enter the bill Amount" >
 
@@ -25,30 +24,30 @@
         android:id="@+id/fifteenper"
         android:layout_width="60dp"
         android:layout_height="40dp"
-        android:layout_marginLeft="100dp"
+        android:layout_marginLeft="90dp"
         android:layout_marginTop="120dp"
-        android:onClick="applyfifteenper"
         android:background="#939393"
+        android:onClick="applyfifteenper"
         android:text="15%" />
 
     <Button
         android:id="@+id/twentyper"
         android:layout_width="60dp"
         android:layout_height="40dp"
-        android:layout_marginLeft="170dp"
+        android:layout_marginLeft="160dp"
         android:layout_marginTop="120dp"
-        android:onClick="applytwentyper"
         android:background="#939393"
+        android:onClick="applytwentyper"
         android:text="20%" />
 
     <Button
         android:id="@+id/tenper"
         android:layout_width="60dp"
         android:layout_height="40dp"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="120dp"
-        android:onClick="applytenper"
         android:background="#939393"
+        android:onClick="applytenper"
         android:text="10%" />
 
     <TextView
@@ -58,8 +57,18 @@
         android:layout_marginLeft="40dp"
         android:layout_marginTop="300dp"
         android:text="Tip is :"
-        android:visibility="invisible"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/custom"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="230dp"
+        android:layout_marginTop="120dp"
+        android:background="#939393"
+        android:onClick="customTip"
+        android:text="Custom" />
 
     <EditText
         android:id="@+id/tipValue"
@@ -67,10 +76,27 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
         android:layout_marginTop="300dp"
-        android:visibility="invisible"
-        android:ems="10" >
-	
-        <requestFocus />
-    </EditText>
+        android:ems="10"
+        android:visibility="invisible" />
+
+    <EditText
+        android:id="@+id/customTip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="190dp"
+        android:layout_marginTop="200dp"
+        android:ems="10"
+        android:hint="Enter the custom tip percentage"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/customTipText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="200dp"
+        android:text="Enter Custom Tip %"
+        android:textSize="20dp"
+        android:visibility="invisible" />
 
 </FrameLayout>

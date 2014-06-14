@@ -1,12 +1,11 @@
 package com.example.tipcalculator;
 
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,7 +15,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.os.Build;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -24,13 +22,19 @@ public class MainActivity extends ActionBarActivity {
 	int selectedColor = Color.CYAN;
 	int unselectColor = Color.GRAY;
 	EditText enteredAmt;
-
+	EditText customAmt;
+	TextView customText;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		enteredAmt = (EditText) findViewById(R.id.totalAmt);
+		customAmt = (EditText) findViewById(R.id.customTip);
+		customText=  (TextView) findViewById(R.id.customTipText);
 		listenEditBillAmt();
+		listenEditCustomAmt();
+
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
@@ -59,20 +63,62 @@ public class MainActivity extends ActionBarActivity {
 
 	public void applytenper(View v) {
 		clickedButtonid = 1;
-		setColors(selectedColor, unselectColor, unselectColor);
+		setColors(selectedColor, unselectColor, unselectColor, unselectColor);
+		setVisibilityForCustom(View.INVISIBLE);
 		setTipAmount(0.1);
 	}
 
 	public void applyfifteenper(View v) {
 		clickedButtonid = 2;
-		setColors(unselectColor, selectedColor, unselectColor);
+		setColors(unselectColor, selectedColor, unselectColor, unselectColor);
+		setVisibilityForCustom(View.INVISIBLE);
 		setTipAmount(0.15);
 	}
 
 	public void applytwentyper(View v) {
 		clickedButtonid = 3;
-		setColors(unselectColor, unselectColor, selectedColor);
+		setColors(unselectColor, unselectColor, selectedColor, unselectColor);
+		setVisibilityForCustom(View.INVISIBLE);
 		setTipAmount(0.2);
+	}
+
+	public void customTip(View v) {
+		clickedButtonid = 4;
+		setColors(unselectColor, unselectColor, unselectColor, selectedColor);
+		setVisibilityForCustom(View.VISIBLE);
+		setCustomTipAmount();
+	}
+
+	private void setVisibilityForCustom(int visible) {
+		customAmt.setVisibility(visible);
+		customText.setVisibility(visible);
+	}
+	
+	private void listenEditCustomAmt() {
+		customAmt.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				setCustomTipAmount();
+				
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {				
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s) {	}
+		});
+		
+	}
+	
+	private void setCustomTipAmount() {
+		if(customAmt.getText().toString().compareTo("") !=0 && isDouble(customAmt.getText().toString())) {
+			Double customTipValue = Double.parseDouble(customAmt.getText().toString());
+			setTipAmount(customTipValue/100);
+		}
 	}
 
 	private void listenEditBillAmt() {
@@ -86,16 +132,16 @@ public class MainActivity extends ActionBarActivity {
 				}
 				switch (clickedButtonid) {
 				case 1:
-					setColors(selectedColor, unselectColor, unselectColor);
-					setTipAmount(0.1);
+					applytenper(null);
 					break;
 				case 2:
-					setColors(unselectColor, selectedColor, unselectColor);
-					setTipAmount(0.15);
+					applyfifteenper(null);
 					break;
 				case 3:
-					setColors(unselectColor, unselectColor, selectedColor);
-					setTipAmount(0.2);
+					applytwentyper(null);
+					break;
+				case 4:
+					customTip(null);
 					break;
 				}
 			}
@@ -111,34 +157,37 @@ public class MainActivity extends ActionBarActivity {
 		});
 	}
 
-	private void setColors(int ten, int fifteen, int twenty) {
+	private void setColors(int ten, int fifteen, int twenty, int custom) {
 		Button tenper = (Button) findViewById(R.id.tenper);
 		tenper.setBackgroundColor(ten);
 		Button fifteenper = (Button) findViewById(R.id.fifteenper);
 		fifteenper.setBackgroundColor(fifteen);
 		Button twentyper = (Button) findViewById(R.id.twentyper);
 		twentyper.setBackgroundColor(twenty);
+		Button customper = (Button) findViewById(R.id.custom);
+		customper.setBackgroundColor(custom);
 	}
 
 	private void setTipAmount(Double offset) {
 		EditText enteredAmt = (EditText) findViewById(R.id.totalAmt);
 		EditText tipAmt = (EditText) findViewById(R.id.tipValue);
 		TextView tipText = (TextView) findViewById(R.id.displayText);
-		if (enteredAmt.getText().toString().compareTo("")==0 || !isDouble(enteredAmt.getText().toString())) {
+		if (enteredAmt.getText().toString().compareTo("") == 0
+				|| !isDouble(enteredAmt.getText().toString())) {
 			tipAmt.setText("0.0");
 			Toast.makeText(MainActivity.this, "Enter a valid value", 5);
-			//setColors(unselectColor, unselectColor, unselectColor);
+			// setColors(unselectColor, unselectColor, unselectColor);
 			return;
-		}	
+		}
 		Double doubleAmt = Double.parseDouble(enteredAmt.getText().toString());
 		doubleAmt = doubleAmt * offset;
-		tipAmt.setVisibility(View.VISIBLE);	
+		tipAmt.setVisibility(View.VISIBLE);
 		tipText.setVisibility(View.VISIBLE);
 		tipAmt.setText(doubleAmt.toString());
 	}
 
 	private boolean isDouble(String string) {
-		try{
+		try {
 			Double.parseDouble(string);
 			return true;
 		} catch (Exception e) {
