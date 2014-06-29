@@ -37,4 +37,14 @@
         <requestFocus />
     </EditText>
 
+    <Button
+        android:id="@+id/settings"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="300dp"
+        android:layout_marginTop="20dp"
+        android:onClick="changeSettings"
+        android:text="Settings" />
+
 </FrameLayout>

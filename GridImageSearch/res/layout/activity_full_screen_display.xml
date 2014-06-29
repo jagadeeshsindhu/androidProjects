@@ -16,8 +16,8 @@
 
     <TextView
         android:id="@+id/titleText"
-        android:layout_width="300dp"
-        android:layout_height="60dp"
+        android:layout_width="600dp"
+        android:layout_height="100dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="450dp"
         android:text="TextView"

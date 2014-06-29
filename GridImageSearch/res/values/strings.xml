@@ -6,5 +6,6 @@
     <string name="query_hint">Enter the search term</string>
     <string name="title_activity_full_screen_display">FullScreenDisplay</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_edit_settings">EditSettings</string>
 
 </resources>

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 import com.example.gridimagesearch.R;
+import com.example.gridimagesearch.R.layout;
 import com.example.gridimagesearch.data.ImageUrls;
 import com.loopj.android.image.SmartImageView;
 
